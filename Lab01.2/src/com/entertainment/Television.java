@@ -1,7 +1,7 @@
 package com.entertainment;
 import java.util.Objects;
 
-public class Television {
+public class Television implements Comparable<Television> {
     // fields or instance variables
     private String brand;
     private int volume;
@@ -10,7 +10,7 @@ public class Television {
     private Tuner tuner = new Tuner();  // instantiated internally
 
     // Constructors
-    public Television () {
+    public Television() {
 
     }
 
@@ -79,37 +79,34 @@ public class Television {
      */
 
     @Override
+    public boolean equals(Object obj) {
+        boolean result = false;
+        if (obj instanceof Television) {
+            Television other = (Television) obj;
+            result = Objects.equals(this.getBrand(), other.getBrand()) &&
+                    Objects.equals(this.getVolume(), other.getVolume());
+        }
+        return result;
+    }
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Television that = (Television) o;
+//        return getVolume() == that.getVolume() && Objects.equals(getBrand(), that.getBrand());
+//
+
+    @Override
     public int hashCode() {
-        // this is a poorly written hash function, because it easily results in "has collisions"
-        // a "hash collision" is when DIFFERENT objects (by equals())
-        // have the SAME hashcode (just by coincidence or dumb luck)
-        // return getBrand().length() + getVolume();
-
-        // we can use java.util.Objects to give us a "scientifically correct" hash function,
-        // i.e., one that minimizes the probability of hash collisions
         return Objects.hash(getBrand(), getVolume());
-
     }
 
     @Override
-    public boolean equals(Object obj) { // Television is an Object
-        boolean result = false;
-
-        // proceed only if 'obj' is really a reference to a Television object
-        if(obj != null && (this.getClass() == obj.getClass())) {  // instanceof is a IS-A check change to Class object. okay to use == for Class object
-            // downcast to more specific type Television, so we can call Television methods
-            Television other = (Television) obj;
-
-            // do the checks: brands are the same AND volumes are the same
-            result = Objects.equals(this.getBrand(), other.getBrand()) && // null-safe check
-                     this.getVolume() == other.getVolume();               // int can't be null
-        }
-        return result;
+    public int compareTo(Television other) {
+        return this.getBrand().compareTo(other.getBrand());
     }
 
     @Override
     public String toString() {
         return String.format("%s[brand=%s , volume=%s, currentChannel=%s]",
-                getClass().getSimpleName(),getBrand(),getVolume(),getCurrentChannel());
+                getClass().getSimpleName(), getBrand(), getVolume(), getCurrentChannel());
     }
 }
