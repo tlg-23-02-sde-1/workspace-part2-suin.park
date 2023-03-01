@@ -1,6 +1,12 @@
 package com.entertainment;
 import java.util.Objects;
 
+/*
+ * Natural order is defined by 'brand' (String) and 'volume' (int) then tied on brand.
+ *
+ * To be "consistent with equals," our sort key(s) must align with what was chosen
+ * for equals() and hashCode().
+ */
 public class Television implements Comparable<Television> {
     // fields or instance variables
     private String brand;
@@ -11,7 +17,6 @@ public class Television implements Comparable<Television> {
 
     // Constructors
     public Television() {
-
     }
 
     public Television(String brand, int volume) {
@@ -84,7 +89,7 @@ public class Television implements Comparable<Television> {
         if (obj instanceof Television) {
             Television other = (Television) obj;
             result = Objects.equals(this.getBrand(), other.getBrand()) &&
-                    Objects.equals(this.getVolume(), other.getVolume());
+                    this.getVolume() == other.getVolume();
         }
         return result;
     }
@@ -95,13 +100,22 @@ public class Television implements Comparable<Television> {
 //
 
     @Override
-    public int hashCode() {
+    public int hashCode() {  // whatever used checks on equals method need to be used on hashCode
         return Objects.hash(getBrand(), getVolume());
     }
 
+/*
+ * Natural order is defined by 'brand' (String) and 'volume' (int) then tied on brand.
+ * Since brand (String) is already Comparable, just delegate to its compareTo() method.
+ */
     @Override
     public int compareTo(Television other) {
-        return this.getBrand().compareTo(other.getBrand());
+        int result = this.getBrand().compareTo(other.getBrand());
+
+        if (result == 0) {  // tied on brand, so break the tie by volume
+            result = Integer.compare(this.getVolume(), other.getVolume());
+            }
+        return result;
     }
 
     @Override
