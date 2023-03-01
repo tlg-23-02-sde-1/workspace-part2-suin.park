@@ -10,15 +10,38 @@ package com.math;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
+import org.junit.*;
 
 public class CalculatorTest {
+    // object(s) under test - called a "fixture" in JUnit
+    private Calculator calc;
+
+    @BeforeClass
+    public static void initializeEntireTestRun() {
+        System.out.println("initializeEntireTestRun");
+    }
+
+    @AfterClass
+    public static void finalizeTestRun() {
+        System.out.println("finalizeTestRun");
+    }
+
+    @Before
+    public void setUp() {
+        System.out.println("setUp");
+
+        calc = new Calculator();
+    }
+
+    @After
+    public void tearDown(){
+        System.out.println("tearDown");
+    }
 
     @Test
     public void testAdd() {
         System.out.println("testAdd");
 
-        Calculator calc = new Calculator();
         int result = calc.add(1, 4);
 
         assertEquals(5, result);  // expected, actual
@@ -27,18 +50,12 @@ public class CalculatorTest {
     @Test
     public void testDivide() {
         System.out.println("testDivide");
-
-        Calculator calc = new Calculator();
-        double result = calc.divide(5, 2);
-
-        assertEquals(2.5, result, .001); // expected, actual, delta
+        assertEquals(2.5, calc.divide(5,2), .001); // expected, actual, delta
     }
 
     @Test
     public void testIsEven() {
         System.out.println("testIsEven");
-
-        Calculator calc = new Calculator();
 
         assertTrue(calc.isEven(10));
         assertFalse(calc.isEven(11));
