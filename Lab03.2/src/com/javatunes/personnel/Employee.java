@@ -13,8 +13,7 @@ import java.util.Objects;
 import gov.irs.NamedEntity;
 import gov.irs.TaxPayer;
 
-public abstract class Employee
-implements TaxPayer, NamedEntity {
+public abstract class Employee implements TaxPayer, NamedEntity {
   private String name;
   private Date hireDate;
   
@@ -29,8 +28,9 @@ implements TaxPayer, NamedEntity {
   /**
    * All employees get paid, but they implement this differently.
    * Method in base class but NO implementation.
+   * @return
    */
-  public abstract void pay();
+  public abstract double pay();
   
   /**
    * All employees work, and they all implement this the same way.

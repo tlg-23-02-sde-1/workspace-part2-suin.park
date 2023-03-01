@@ -28,8 +28,10 @@ extends Employee {
   }
   
   @Override
-  public void pay() {
-    System.out.println(getName() + " is paid salary " + getSalary());
+  public double pay() {
+    double payment = getSalary();
+    System.out.println(getName() + " is paid salary " + payment);
+    return payment;
   }
   
   @Override  // interface TaxPayer
