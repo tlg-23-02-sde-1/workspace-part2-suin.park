@@ -12,15 +12,40 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-public class ShoppingCart<T> {
-  // storage for the cart's contents
-  private Collection<T> items = new ArrayList<T>();  // diamond not used here just to emphasize the T
-  
-  public void addItem(T item) {
-    items.add(item);
-  }
-  
-  public void removeItem(T item) {
-    items.remove(item);
-  }
+
+/*
+ * The "T" is really going to be something like MusicItem
+ * if ShoppingCart<MusicItem> cart = ...      // what's the T? MusicItem
+ * if ShoppingCart<MediaPlayer> cart = ... // what's the T? MediaPlayer
+ */
+public class ShoppingCart<T extends Product> {
+    // storage for the cart's contents
+    private Collection<T> items = new ArrayList<T>();  // diamond not used here just to emphasize the T
+
+    public double total() {
+        double result = 0.0;
+
+        for (T item : items) {
+            result += item.getPrice();
+        }
+        return result;
+    }
+
+    public Collection<T> allItems() {
+        return Collections.unmodifiableCollection(items);
+    }
+
+    public int size() {
+        return items.size();
+    }
+
+    public void addItem(T item) {
+        items.add(item);
+    }
+
+    public void removeItem(T item) {
+        items.remove(item);
+    }
+
+
 }
