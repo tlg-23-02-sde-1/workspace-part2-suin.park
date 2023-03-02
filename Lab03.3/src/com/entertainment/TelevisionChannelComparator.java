@@ -10,8 +10,7 @@ package com.entertainment;
 
 import java.util.Comparator;
 
-public class TelevisionChannelComparator
-implements Comparator<Television> {
+public class TelevisionChannelComparator implements Comparator<Television> {
 
   @Override
   public int compare(Television tv1, Television tv2) {

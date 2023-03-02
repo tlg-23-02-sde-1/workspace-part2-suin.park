@@ -10,8 +10,7 @@ package com.entertainment;
 
 import java.util.Objects;
 
-public class Television
-implements Comparable<Television> {
+public class Television implements Comparable<Television> {
   public static final int MIN_VOLUME = 0;
   public static final int MAX_VOLUME = 100;
   public static final int MIN_CHANNEL = 1;
@@ -58,8 +57,7 @@ implements Comparable<Television> {
     return this.volume;
   }
   
-  public void setVolume(int volume)
-  throws IllegalArgumentException {
+  public void setVolume(int volume) throws IllegalArgumentException {
     if (volume >= MIN_VOLUME && volume <= MAX_VOLUME) {
       this.volume = volume;
     }
@@ -73,8 +71,7 @@ implements Comparable<Television> {
     return tuner.getChannel();  // delegate to contained Tuner object
   }
   
-  public void changeChannel(int channel)
-  throws InvalidChannelException {
+  public void changeChannel(int channel) throws InvalidChannelException {
     if (channel >= MIN_CHANNEL && channel <= MAX_CHANNEL) {
       tuner.setChannel(channel);  // delegate to contained Tuner object
     }

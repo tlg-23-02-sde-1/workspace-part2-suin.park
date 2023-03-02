@@ -8,8 +8,7 @@
  */
 package com.entertainment;
 
-public class InvalidChannelException
-extends Exception {
+public class InvalidChannelException extends Exception {
   
   public InvalidChannelException() {
   }
