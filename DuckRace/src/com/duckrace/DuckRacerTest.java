@@ -7,7 +7,7 @@ import static com.duckrace.Reward.*;  // OK to use * for static imports
 class DuckRacerTest {
 
     public static void main(String[] args) {
-        DuckRacer racer5 = new DuckRacer(5,"Chris");
+        DuckRacer racer5 = new DuckRacer(5, "John");
 
         System.out.println(racer5); // toString() automatically called
 

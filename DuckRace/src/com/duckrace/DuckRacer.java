@@ -1,7 +1,6 @@
 package com.duckrace;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -11,10 +10,9 @@ class DuckRacer {
     private String name;
     private final List<Reward> rewards = new ArrayList<>();
 
-    // constructors
     public DuckRacer(int id, String name) {
         this.id = id;
-        setName(name);
+        this.name = name;
     }
 
     // "action" or "business" methods
@@ -35,7 +33,7 @@ class DuckRacer {
     public void setName(String name) {
         this.name = name;
     }
-    // a derived propery, we can "calculate" the number of wins from the 'rewards' collection
+    // a derived property, we can "calculate" the number of wins from the 'rewards' collection
     public int getWins() {
         return rewards.size();
     }
