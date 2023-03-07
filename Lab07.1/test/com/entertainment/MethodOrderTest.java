@@ -14,28 +14,38 @@ import org.junit.Test;
 import org.junit.rules.TestName;
 import org.junit.runners.MethodSorters;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * TODO: use an annotation(s) in this class to apply some control over the order of test execution.
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MethodOrderTest {
-  
+  @Rule
+  public TestName testName = new TestName();
+
+
   @Test
   public void shouldIOrderTheExceutionOfMyTests() {
-    System.out.println("shouldIOrderTheExceutionOfMyTests");
+    assertEquals("shouldIOrderTheExceutionOfMyTests", testName.getMethodName());
+    System.out.println("current MethodName is:" + testName.getMethodName());
   }
-  
+
   @Test
   public void testSomething() {
-    System.out.println("testSomething");
+    assertEquals("testSomething", testName.getMethodName());
+    System.out.println("current MethodName is:" + testName.getMethodName());
   }
 
   @Test
   public void businessMethodShouldWorkCorrectly() {
-    System.out.println("businessMethodShouldWorkCorrectly");
+    assertEquals("businessMethodShouldWorkCorrectly", testName.getMethodName());
+    System.out.println("current MethodName is:" + testName.getMethodName());
   }
   
   @Test
   public void throwsExceptionIfUserDoesNotHaveSufficientPrivileges() {
-    System.out.println("throwsExceptionIfUserDoesNotHaveSufficientPrivileges");
+    assertEquals("throwsExceptionIfUserDoesNotHaveSufficientPrivileges", testName.getMethodName());
+    System.out.println("current MethodName is:" + testName.getMethodName());
   }
 }
