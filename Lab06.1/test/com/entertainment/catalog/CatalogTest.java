@@ -9,15 +9,28 @@
 package com.entertainment.catalog;
 
 import static org.junit.Assert.*;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+
+import java.util.*;
+
 import org.junit.Test;
 import com.entertainment.Television;
 
 public class CatalogTest {
-  
+
+  @Test
+  public void sortByVolumeIncreasing() {
+    List<Television> tvList = new ArrayList<>(Catalog.getInventory());
+    tvList.sort(new Comparator<Television>() {
+      @Override
+      public int compare(Television tv1, Television tv2) {
+        return Integer.compare(tv1.getVolume(), tv2.getVolume());
+      }
+    });
+    for (Television tv : tvList) {
+      System.out.println(tv);
+    }
+  }
+
   /**
    * Contract: a no-matches result should be an empty collection (not null).
    */
@@ -68,7 +81,18 @@ public class CatalogTest {
     Set<Television> inventorySet = new HashSet<>(inventory);
     assertEquals(23, inventorySet.size());
   }
-  
+
+  @Test
+  public void bonusPage172_findTheLoudest() {
+    Television loudest = Collections.max(Catalog.getInventory(), new Comparator<Television>() {
+      @Override
+      public int compare(Television tv1, Television tv2) {
+        return Integer.compare(tv1.getVolume(), tv2.getVolume());
+      }
+    });
+    System.out.println(loudest);
+  }
+
   /**
    * OPTIONAL PART: find loudest Television
    * Below is the Lab04.1 implementation that uses the "brute force" technique of iteration and comparison.
