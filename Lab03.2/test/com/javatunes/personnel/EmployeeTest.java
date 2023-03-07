@@ -11,10 +11,22 @@ public class EmployeeTest {
     private Employee emp1;
     private Employee emp2;
 
+
+
     @Before
     public void setUp() {
-        emp1 = new SalariedEmployee("Jack", Date.valueOf("2020-10-10"));
-        emp2 = new SalariedEmployee("Jack", Date.valueOf("2020-10-10"));
+        // emp1 = new DummyEmployee("Jack", Date.valueOf("2020-10-10"));
+        // emp2 = new DummyEmployee("Jack", Date.valueOf("2020-10-10"));
+
+        emp1 = getEmp1();
+        emp2 = getEmp1();
+
+    }
+    private Employee getEmp1() {
+        return new Employee("Jack", Date.valueOf("2020-10-10")) {
+            public double pay() {return 0;}
+            public double payTaxes() {return 0;}
+        };
     }
 
     @Test
@@ -39,4 +51,21 @@ public class EmployeeTest {
         assertEquals(emp1,emp2);        // for objects, equals() gets called
         assertTrue(emp1.equals(emp2));  // alternative assertion
     }
+
+    // NAMED MEMBER-LEVEL INNER CLASSES
+    private class DummyEmployee extends Employee {
+
+        // ctor
+        public DummyEmployee(String name, Date hireDate) {
+            super(name, hireDate);
+        }
+        // contracts
+        public double pay() {
+            return 0;
+        }
+        public double payTaxes() {
+            return 0;
+        }
+    }
+
 }
